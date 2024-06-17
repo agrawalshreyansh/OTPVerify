@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<form action="submit" method="post" onsubmit="return ValidateForm()">
+    {% csrf_token %}
+    {% comment %} <div class="form-group"> {% endcomment %}
+        {% comment %} <label for="name">Name:</label> {% endcomment %}
+        {% comment %} <input type="text" id="name" name="name" required> {% endcomment %}
+    </div>
+    <div class="form-group">
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    {% comment %} <div class="form-group"> {% endcomment %}
+        {% comment %} <label for="password">Password:</label> {% endcomment %}
+        {% comment %} <input type="password" id="password" name="password" required> {% endcomment %}
+    {% comment %} </div> {% endcomment %}
+    {% comment %} <div class="form-group"> {% endcomment %}
+        {% comment %} <label for="repassword">Re-type Password:</label> {% endcomment %}
+        {% comment %} <input type="password" id="repassword" name="repassword" required> {% endcomment %}
+    {% comment %} </div> {% endcomment %}
+
+    <div class="form-group">
+        <button type="submit">Register</button>
+    </div>
+</form>
+<div id="PTO">
+<form onsubmit="return ValidateOTP()" >
+    <div class="form-group">
+        <label for="otp">Enter OTP:</label>
+        <input type="email" id="userotp" name="email" required>
+    </div>
+</form>
+</div>
+
+<script>   
+    let shr = document.getElementById("PTO");
+    shr.style.display = "none"; 
+    function ValidateForm() {
+        document.getElementById("PTO").style.display="block";
+        return true;
+    }
+    function ValidateOTP() {
+        const otp= {{OTP}}
+        if(document.getElementById("userotp").value===otp){
+            alert("Authentication Successful")
+        }
+    }
+</script>
+</body>
+</html>
